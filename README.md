@@ -1,3 +1,15 @@
+# Get Started
+
+  > git clone https://github.com/nodesense/247-react-redux-sep-2018
+  
+  > cd 247-react-redux-sep-2018
+  
+  > npm install
+
+  > npm start 
+
+  
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
