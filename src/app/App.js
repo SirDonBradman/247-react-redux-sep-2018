@@ -8,6 +8,8 @@ import Home from './components/Home';
 import About from './components/About';
 import Contact from './components/Contact';
 
+import Cart from './cart/components/Cart';
+
 export default class App extends React.Component {
 
     // keyword
@@ -19,14 +21,19 @@ export default class App extends React.Component {
         // JSX, v.dom
         return (
             <div>
-                <h2>React App</h2>
-                <Header />
+        <Header appTitle="Product App" />
 
-                <Home />
-                <Contact />
-                <About />
+        <Cart />
+        
+        <Home startValue={100} />
+        <Contact />
+        <About />
 
-                <Footer />
+        <Footer appTitle="Product app" 
+                year={2018}
+                address = { {city: 'Bangalore', state: 'KA'}  }
+
+                />
             </div>
         )
     }
