@@ -8,6 +8,33 @@
 
     > npm start 
 
+# CORS
+
+CORS
+
+Cross Origin Request Sharing
+
+http://example.com (React)
+
+below are cross origins
+
+http://api.example.com (web service)
+http://example.com:7070 (web service)
+https://example.com:7070 (web service)
+https://yahoo.com
+
+Same Origin
+
+SAME protocol
+SAME domain
+SAME PORT
+
+
+# OKTA Authentication
+
+  
+
+
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).

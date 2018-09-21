@@ -7,9 +7,35 @@ import Footer from './components/Footer';
 import Home from './components/Home';
 import About from './components/About';
 import Contact from './components/Contact';
+import NotFound from './components/NotFound';
+import Loadable from 'react-loadable';
 
-import Cart from './cart/components/Cart';
 
+// import CustomImplicit from './components/CustomImplicit';
+
+// import Cart from './cart/components/Cart';
+
+import {Route, Switch} from 'react-router-dom';
+import { SecureRoute, ImplicitCallback } from '@okta/okta-react';
+
+import ReduxCart from './product/containers/Cart';
+
+// functional component
+// shown as place holder when dynamic code is downloading
+function Loading() {
+    return (
+        <div>
+            <h2>Loading....</h2>
+        </div>
+    )
+}
+
+const LoadableCart = Loadable({
+    // import is a special function, part of browser specifications
+    loader: () => import('./cart/components/Cart'),
+    loading: Loading,
+  });
+  
 export default class App extends React.Component {
 
     // keyword
@@ -23,11 +49,21 @@ export default class App extends React.Component {
             <div>
         <Header appTitle="Product App" />
 
-        <Cart />
+        <Switch>
+            <Route path="/" exact component={Home} />
+            {/* <SecureRoute path="/cart" component={LoadableCart} /> */}
+
+            <Route path="/cart" component={LoadableCart} />
+            
+            <Route path="/redux" component={ReduxCart} />
+            
+            <Route path="/about" component={About} />
+            <Route path="/contact" component={Contact} />
+            <Route path="/implicit/callback" component={ImplicitCallback} />
+            {/* <Route path="/implicit/callback" component={CustomImplicit} /> */}
+            <Route path='*' component={NotFound} />
+        </Switch>
         
-        <Home startValue={100} />
-        <Contact />
-        <About />
 
         <Footer appTitle="Product app" 
                 year={2018}

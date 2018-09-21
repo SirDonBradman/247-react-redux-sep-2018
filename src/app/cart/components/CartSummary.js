@@ -1,11 +1,14 @@
 // CartSummary.js
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 
 //TODO: PropTypes
 
-// TODO: PureComponent
-export default class CartSummary extends Component {
+// PureComponent
+// PureComponent is implementing shouldComponentUpdate
+// it checks all the props including functions, then state items
+// if any differences, it calls render
+export default class CartSummary extends PureComponent {
     constructor(props) {
         super(props);
 
@@ -16,7 +19,22 @@ export default class CartSummary extends Component {
     }
  
     //TODO: componentWillMount
+    componentWillMount() {
+        this.recalculate(this.props);
+    }
+
+    // update cycle methods
     //TODO: componentWillReceiveProps, recalculate 
+    // called when parent component render called on update cycle
+    componentWillReceiveProps(nextProps) {
+        console.log('summary receive props ', this.props)
+        console.log('summary next props ', nextProps)
+
+        if (this.props.amount != nextProps.amount ||
+            this.props.count != nextProps.count) {
+                this.recalculate(nextProps)
+            }
+    }
  
     //TODO: shouldComponentUpdate
 

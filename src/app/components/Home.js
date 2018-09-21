@@ -97,6 +97,37 @@ export default class Home extends Component {
         })
     }
 
+    // life cycle method
+    // whenever parent render called on update cycle
+    // to know if any diff in props
+    // whenever this.setState is called
+    // NOT CALLED ON forceUpdate
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log('should update current state ', this.state);
+        console.log('next state', nextState);
+
+        if (nextState.counter % 2 == 0)
+            return true;
+
+        return false;
+        // return true;  // shall call render function
+        // return false // shall not call render function
+    }
+
+    componentDidMount() {
+        this.timer = setInterval( () => {
+            console.log('Timer running on home page')
+            this.setState({
+                counter: this.state.counter + 1
+            })
+        }, 5000)
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timer)
+    }
+
+
     render() {
         console.log('Home render ', this.props)
 

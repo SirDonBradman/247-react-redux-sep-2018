@@ -13,6 +13,18 @@ export default class CartList extends Component {
     }
      
     //TODO: shouldComponentUpdate
+
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log('cart list should update');
+        console.log('nextProps', nextProps);
+        console.log('current props', this.props)
+
+        if (nextProps.items != this.props.items) {
+            return true; // calls render
+        }
+
+        return false; // doesn't call render
+    }
     
     render() {
         console.log("CartList Render");
@@ -41,6 +53,10 @@ export default class CartList extends Component {
                         items.map (item => (
                             <CartItem item={item}
                                       key={item.id}
+
+                                      removeItem={this.props.removeItem}
+                                      updateItem={this.props.updateItem}
+
                                       />
                         ))
                     }
@@ -57,5 +73,7 @@ CartList.defaultProps = {
 }
 
 CartList.propTypes = {
-    
+    items: PropTypes.array.isRequired, //mandatory
+    removeItem: PropTypes.func.isRequired,
+    updateItem: PropTypes.func.isRequired
 }

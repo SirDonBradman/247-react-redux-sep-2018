@@ -12,7 +12,7 @@ export default class Cart extends Component {
 
         this.state = {
             items: [ 
-            			{id: 1, name: 'P1', price: 100, qty: 1}
+            			{id: 1, name: 'P1', price: 100, qty: 5}
             	   ],
             amount: 0, // sum of all items price * qty
             count: 0, // sum of all items qty
@@ -29,21 +29,60 @@ export default class Cart extends Component {
             qty: 1
         }
 
-        //TODO:
+        // shallow copy: clone existing items into new array
+        const items = [...this.state.items, item];
+        this.setState({
+            items
+        })
+
+        this.recalculate(items);
  
     }
     
+    // this function to be called by CartItem
     removeItem = (id) => {
         //TODO
+        console.log('Cart removeItem ', id)
+
+        // return all items except the one to be removed, new array 
+        const items = this.state
+                            .items.filter(item => item.id != id);
+        
+        this.setState({
+                items // items: items 
+        })
+        this.recalculate(items);
     }
 
     updateItem = (id, qty) => {
         //TODO
+
+         // two level immutable
+         // for items array level, item object level
+         // create a new array 
+         let items = this.state.items.map (item => {
+             if (item.id == id) {
+                 // create new object, update qty
+                 return {...item, qty}
+             }
+             return item;
+         })
+
+         this.setState({
+             items
+         })
+
+         this.recalculate(items)
+
     }
 
     empty = () => {
         //TODO
-         
+        this.setState({
+            items: []
+        })
+
+        this.recalculate([]);
     }
 
     //dummy
@@ -69,8 +108,24 @@ export default class Cart extends Component {
         })
     }
 
-    //TODO:
+    //creation life cycle:
     //componentWillMount
+    // called after constructor, before first render
+    // called only once per object life
+    componentWillMount() {
+        console.log('Cart componentWillMount')
+        this.recalculate(this.state.items);
+
+        // calling setState on same callstack
+        // doesn't call render multiple times
+        this.setState({flag: true});
+        this.setState({flag: false});
+
+    }
+
+    componentDidMount() {
+        
+    }
     
     
     render() {
@@ -95,6 +150,7 @@ export default class Cart extends Component {
 
             <CartList  items={this.state.items}  
                        removeItem={this.removeItem}
+                       updateItem={this.updateItem}
             />
 
             <CartSummary amount={this.state.amount}
