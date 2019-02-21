@@ -1,3 +1,81 @@
+# Notes
+get the components one by one from server when required (lazy loading)
+css modules
+making api calls in redux
+
+gopalakrishnan.subramani@nodesense.ai - Test@123
+
+make a dev account in okta and login to it
+
+create an app in okta
+
+add packages to packages.config in your application
+	npm install @material-ui/core  @material-ui/icons @okta/jwt-verifier @okta/okta-react --save
+
+make a file(at the root level of your application) called ".env.local" and put all the configurations for dev, stage and production environments
+
+	.env.local -----------------------------------------------------
+		
+		REACT_APP_OKTA_CLIENT_ID=0oag5civb1OjevZJ10h7
+		REACT_APP_OKTA_ORG_URL=https://dev-710091.oktapreview.com
+	-----------------------------------------------------------------
+
+https://github.com/nodesense/react-app
+https://github.com/nodesense/restful-server
+https://github.com/nodesense/247-react-redux-sep-2018
+
+
+-----------------------------------------------------------------------------------------------
+Node JS Training repository - https://github.com/nodesense/247-nodejs-nov-2018
+
+
+launch.json ---------------------------------
+
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Node Product Service",
+            "program": "${workspaceFolder}/src/server.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Mocha All",
+            "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+            "args": [
+                "--timeout",
+                "999999",
+                "--colors",
+                "${workspaceFolder}/src/test"
+            ],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Mocha Current File",
+            "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+            "args": [
+                "--timeout",
+                "999999",
+                "--colors",
+                "${file}"
+            ],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen"
+        }
+    ]
+}
+
+
 # Get Started
 
     > git clone https://github.com/nodesense/247-react-redux-sep-2018
